@@ -1,20 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Academy Contacts
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [scrollY]="!scroll">
+<ion-header collapse="condense">
+  <ion-toolbar>
+    <ion-title size="large">My Contacts</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="search">
+      <ion-input placeholder="Search">
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-input>
+    </div>
+  </ion-toolbar>
+</ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-item-group *ngFor="let item of data">
+  <ion-item-divider sticky>
+    <ion-label>
+      {{item.key}}
+    </ion-label>
+  </ion-item-divider>
+  <ion-item *ngFor="let user of item.users">
+    <ion-label>
+      {{user.first_name}} <b>{{user.last_name}}</b>
+    </ion-label>
+  </ion-item>
+</ion-item-group>
+<app-alphabet-scroll (letterSelected)="scrollToLetter($event)" (scrollingLetter)="letterScrollActive($event)"></app-alphabet-scroll>
 </ion-content>
